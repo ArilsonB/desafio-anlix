@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   Relation,
 } from 'typeorm';
+import { IndexType } from 'typescript';
 import { Patient } from '../../patient/entities/patient.entity';
 
 export enum TipoIndice {
@@ -29,7 +30,7 @@ export class Index {
   epoch: number;
 
   @Column()
-  tipo_indice: string;
+  tipo_indice: IndexType;
 
   @Column('decimal', { precision: 5, scale: 6 })
   indice: number;
