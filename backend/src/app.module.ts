@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { IndexesModule } from './modules/indexes/indexes.module';
 import { PatientModule } from './modules/patient/patient.module';
-import { CharacteristicsModule } from './modules/characteristics/characteristics.module';
 
 @Module({
   imports: [
@@ -19,7 +19,7 @@ import { CharacteristicsModule } from './modules/characteristics/characteristics
       synchronize: false,
     }),
     PatientModule,
-    CharacteristicsModule,
+    IndexesModule,
   ],
 })
 export class AppModule {}
