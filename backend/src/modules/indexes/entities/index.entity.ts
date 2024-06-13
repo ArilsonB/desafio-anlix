@@ -8,6 +8,11 @@ import {
 } from 'typeorm';
 import { Patient } from '../../patient/entities/patient.entity';
 
+export enum TipoIndice {
+  CARDIACO = 'cardiaco',
+  PULMONAR = 'pulmonar',
+}
+
 @Entity({ name: 'indices' })
 export class Index {
   @PrimaryGeneratedColumn()
@@ -23,6 +28,9 @@ export class Index {
   @Column()
   epoch: number;
 
+  @Column()
+  tipo_indice: string;
+
   @Column('decimal', { precision: 5, scale: 6 })
-  ind_card: number;
+  indice: number;
 }
