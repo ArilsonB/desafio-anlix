@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from 'typeorm';
+import { Index } from '../../indexes/entities/index.entity';
 
 @Entity({ name: 'paciente' })
 export class Patient {
@@ -70,4 +71,8 @@ export class Patient {
 
   @Column()
   cor: string;
+
+  @OneToMany(() => Index, (index) => index.patient)
+  @JoinColumn()
+  indexes: Index[];
 }

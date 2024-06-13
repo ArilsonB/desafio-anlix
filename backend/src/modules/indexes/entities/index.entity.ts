@@ -1,4 +1,3 @@
-import { Patient } from 'src/modules/patient/entities/patient.entity';
 import {
   Column,
   Entity,
@@ -7,8 +6,9 @@ import {
   PrimaryGeneratedColumn,
   Relation,
 } from 'typeorm';
+import { Patient } from '../../patient/entities/patient.entity';
 
-@Entity({ name: 'caracteristicas' })
+@Entity({ name: 'indices' })
 export class Index {
   @PrimaryGeneratedColumn()
   id: number;

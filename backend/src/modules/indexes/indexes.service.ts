@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateIndexDto } from './dto/create-index.dto';
 import { UpdateIndexDto } from './dto/update-index.dto';
-import { Index } from './entities/indexes.entity';
+import { Index } from './entities/index.entity';
 
 @Injectable()
 export class IndexesService {
