@@ -1,24 +1,28 @@
 # desafio-anlix
 
-# Incialização
+# Como executar o projeto?
 
-cd backend && npm install
+1. Clone o repositório
 
-docker compose up -d
+2. Instale os pacotes do backend com o comando: "cd backend && npm install"
 
-npm run db:create
+3. Renomeie o arquivo ".env.example" para ".env" com: "mv .env.example .env" - Os dados padrão de acesso ao banco de dados já estão nesta env.
 
-npm run migration:run
+3. Suba o container do banco de dados: "docker compose up -d"
 
-npm run seed:run
+4. Crie o banco de dados com: "npm run db:create"
 
-npm run start:dev
+5. Importe a estrutura do banco de dados com: "npm run migration:run"
 
-cd web
+6. Importe os dados para o banco de dados com: "npm run seed:run"
 
-npm install
+7. Inicie o backend com "npm run start:dev"
 
-npm run dev
+8. Entre na pasta do frontend: "cd web" 
+
+9. Instale os pacotes "npm install"
+
+10. Rode o projeto: "npm run dev"
 
 
 O que foi feito?
