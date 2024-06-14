@@ -3,6 +3,7 @@ import { TipoIndice } from 'src/modules/indexes/entities/index.entity';
 
 export class PatientIndexesQuery {
   @ApiProperty({
+    enum: ['cardiaco', 'pulmonar'],
     description: 'Get patient all indexes by index type',
   })
   index_type?: TipoIndice;
