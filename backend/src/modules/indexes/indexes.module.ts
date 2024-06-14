@@ -8,5 +8,6 @@ import { IndexesService } from './indexes.service';
   imports: [TypeOrmModule.forFeature([Index])],
   controllers: [IndexesController],
   providers: [IndexesService],
+  exports: [IndexesService],
 })
 export class IndexesModule {}

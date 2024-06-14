@@ -1,42 +1,41 @@
 import {
-  Body,
   Controller,
   Delete,
   Get,
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
-import { CreateIndexDto } from './dto/create-index.dto';
-import { UpdateIndexDto } from './dto/update-index.dto';
+import { FindIndexesDto } from './dto/find-indexes.dto';
 import { IndexesService } from './indexes.service';
 
-@Controller('characteristics')
+@Controller('index')
 export class IndexesController {
-  constructor(private readonly characteristicsService: IndexesService) {}
+  constructor(private readonly indexesService: IndexesService) {}
 
   @Post()
-  create(@Body() createIndexDto: CreateIndexDto) {
-    return this.characteristicsService.create(createIndexDto);
+  create() {
+    return this.indexesService.create();
   }
 
   @Get()
-  findAll() {
-    return this.characteristicsService.findAll();
+  findAll(@Query() { date }: FindIndexesDto) {
+    return this.indexesService.findAll(date);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.characteristicsService.findOne(+id);
+    return this.indexesService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateIndexDto: UpdateIndexDto) {
-    return this.characteristicsService.update(+id, updateIndexDto);
+  update(@Param('id') id: string) {
+    return this.indexesService.update(+id);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.characteristicsService.remove(+id);
+    return this.indexesService.remove(+id);
   }
 }

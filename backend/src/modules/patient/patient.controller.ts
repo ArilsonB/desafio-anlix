@@ -1,5 +1,4 @@
 import {
-  Body,
   Controller,
   Delete,
   Get,
@@ -8,23 +7,23 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { CreatePatientDto } from './dto/create-patient.dto';
-import { UpdatePatientDto } from './dto/update-patient.dto';
-import { PatientService } from './patient.service';
 import { PatientIndexQuery } from './dto/index/patient-index.dto';
+import { PatientIndexesQuery } from './dto/index/patient-indexes.dto';
+import { PatientService } from './patient.service';
+import { FindPatientsDto } from './dto/find-patients.dto';
 
 @Controller('patient')
 export class PatientController {
   constructor(private readonly patientService: PatientService) {}
 
   @Post()
-  create(@Body() createPatientDto: CreatePatientDto) {
-    return this.patientService.create(createPatientDto);
+  create() {
+    return this.patientService.create();
   }
 
   @Get()
-  findAll() {
-    return this.patientService.findAll();
+  findAll(@Query() { search }: FindPatientsDto) {
+    return this.patientService.findAll(search);
   }
 
   @Get(':cpf/index')
@@ -35,14 +34,22 @@ export class PatientController {
     return this.patientService.findLatestIndex(cpf, index_type);
   }
 
+  @Get(':cpf/indexes')
+  findPatientIndexes(
+    @Param('cpf') cpf: string,
+    @Query() indexesQuery: PatientIndexesQuery,
+  ) {
+    return this.patientService.findIndexes(cpf, indexesQuery);
+  }
+
   @Get(':cpf')
   findOne(@Param('cpf') cpf: string) {
     return this.patientService.findOne(cpf);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePatientDto: UpdatePatientDto) {
-    return this.patientService.update(+id, updatePatientDto);
+  update(@Param('id') id: string) {
+    return this.patientService.update(+id);
   }
 
   @Delete(':id')
