@@ -18,11 +18,17 @@
 
 7. Inicie o backend com "npm run start:dev"
 
-8. Entre na pasta do frontend: "cd web" 
+8. Acesse o backend em: "http://localhost:3001"
 
-9. Instale os pacotes "npm install"
+Obs: Acesse a documentação das rotas com o swagger em "http://localhost:3001/docs"
 
-10. Rode o projeto: "npm run dev"
+9. Entre na pasta do frontend: "cd web" 
+
+10. Instale os pacotes "npm install"
+
+11. Rode o projeto: "npm run dev"
+
+12. Acesse o frontend em: "http://localhost:3000"
 
 
 O que foi feito?
