@@ -29,13 +29,15 @@ import {
 import { IPatient } from "@/types/patient.type";
 import { columns } from "./columns";
 import { useGetPatients } from "./use-get-patients";
+import { useExportPatientIndexes } from "./use-export-patient-indexes";
 
 export function PatientsTable() {
   const [search, setSearch] = React.useState<string | undefined>(undefined);
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
 
-  // const [rowSelection, setRowSelection] = React.useState<>();
+  const { exportData } = useExportPatientIndexes();
 
   const { data } = useGetPatients(search);
 
@@ -44,8 +46,11 @@ export function PatientsTable() {
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onRowSelectionChange: setRowSelection,
     onColumnVisibilityChange: setColumnVisibility,
+    getRowId: (row) => row.cpf,
     state: {
+      rowSelection,
       columnVisibility,
     },
   });
@@ -59,7 +64,18 @@ export function PatientsTable() {
           onChange={(event) => setSearch(event.target.value)}
           className="max-w-sm"
         />
-        <Button>Exportar Indices</Button>
+        <Button
+          onClick={() =>
+            exportData(
+              table
+                .getFilteredSelectedRowModel()
+                .rows.map((row) => row.original.cpf)
+            )
+          }
+          disabled={table.getFilteredSelectedRowModel().rows.length === 0}
+        >
+          Exportar Indices
+        </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -139,8 +155,8 @@ export function PatientsTable() {
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+          {table.getFilteredSelectedRowModel().rows.length} de{" "}
+          {table.getFilteredRowModel().rows.length} pacientes(s) selecionados.
         </div>
         <div className="space-x-2">
           <Button
