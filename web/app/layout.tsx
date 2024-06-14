@@ -4,6 +4,8 @@ import "./globals.css";
 
 import React from "react";
 import { cn } from "../lib/utils";
+import { Header } from "./components/Header";
+import { Providers } from "@/providers";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -24,11 +26,14 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen min-w-screen  bg-background font-sans antialiased",
           fontSans.variable
         )}
       >
-        {children}
+        <Providers>
+          <Header />
+          <main className="container mx-auto px-2">{children}</main>
+        </Providers>
       </body>
     </html>
   );

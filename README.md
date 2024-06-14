@@ -41,4 +41,4 @@ O que foi feito?
 * Consultar pacientes que contenham um nome ou parte de um nome a ser especificado na chamada da API.
 
 * Frontend:
-* 
+* Buscar um paciente por nome e exibir o valor mais recente de cada uma de suas características;
