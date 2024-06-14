@@ -26,7 +26,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Patient } from "@/types/patient.type";
+import { IPatient } from "@/types/patient.type";
 import { columns } from "./columns";
 import { useGetPatients } from "./use-get-patients";
 
@@ -35,9 +35,11 @@ export function PatientsTable() {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
 
+  // const [rowSelection, setRowSelection] = React.useState<>();
+
   const { data } = useGetPatients(search);
 
-  const table = useReactTable<Patient>({
+  const table = useReactTable<IPatient>({
     data: data ?? [],
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -57,6 +59,7 @@ export function PatientsTable() {
           onChange={(event) => setSearch(event.target.value)}
           className="max-w-sm"
         />
+        <Button>Exportar Indices</Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">

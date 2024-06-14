@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { parse } from 'date-fns';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
+import { utils } from 'xlsx';
 import { Index, TipoIndice } from './entities/index.entity';
 
 @Injectable()
@@ -99,6 +100,20 @@ export class IndexesService {
         data: 'desc',
       },
     });
+  }
+
+  async exportCSVFile(patients: number[]) {
+    const data = await this.indexRepository.find({
+      where: {
+        cpf: In(patients),
+      },
+    });
+
+    const worksheet = utils.json_to_sheet(data);
+
+    const csvData = utils.sheet_to_csv(worksheet);
+
+    return csvData;
   }
 
   update(id: number) {
