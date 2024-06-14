@@ -1,25 +1,55 @@
 import React from "react";
 import { NextPage } from "next";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 const PatientPage: NextPage = (): JSX.Element => {
   return (
-    <div className="flex flex-column">
-      <div>
-        <h1>Indices Recentes do Paciente: {}</h1>
+    <div className="flex flex-col space-y-4">
+      <div className="my-4 flex-col">
+        <h1 className="text-3xl">Indices Recentes do Paciente: {}</h1>
+        <Separator className="my-4" />
       </div>
-      <div className="flex flex-row">
-        <div className="flex flex-col">
-          <h2>Indice Cardiaco</h2>
+      <div className="flex flex-row gap-4">
+        <div className="flex flex-col flex-1">
+          <Card className="w-full">
+            <CardHeader>
+              <CardTitle>Indice Cardiaco</CardTitle>
+              <CardDescription>
+                Indice registrado em: 00/00/0000
+              </CardDescription>
+            </CardHeader>
+            <CardContent></CardContent>
+          </Card>
         </div>
-        <div className="flex flex-col">
-          <h2>Indice Pulmonar</h2>
+        <div className="flex flex-col flex-1">
+          <Card className="w-full">
+            <CardHeader>
+              <CardTitle>Indice Pulmonar</CardTitle>
+              <CardDescription>
+                Indice registrado em: 00/00/0000
+              </CardDescription>
+            </CardHeader>
+            <CardContent></CardContent>
+          </Card>
         </div>
       </div>
       <div className="flex flex-col">
-        <div>
-          <h2>Todos os Indices</h2>
-        </div>
-        <div>Tabela Aqui...</div>
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>Todos os Indices</CardTitle>
+            <CardDescription>
+              Todos os Indices Registrados do Paciente
+            </CardDescription>
+          </CardHeader>
+          <CardContent></CardContent>
+        </Card>
       </div>
     </div>
   );
