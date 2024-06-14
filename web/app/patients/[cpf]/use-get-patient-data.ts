@@ -1,8 +1,9 @@
 import { http } from "@/lib/http";
-import { TipoIndice } from "@/types/index.type";
+import { IIndex, TipoIndice } from "@/types/index.type";
+import { IPatient } from "@/types/patient.type";
 import { useQuery } from "@tanstack/react-query";
 
-const fetchPatientData = async (cpf: string) => {
+const fetchPatientData = async (cpf: string): Promise<IPatient> => {
   const response = await http.get(`/patient/${cpf}`, {
     params: {},
   });
@@ -10,10 +11,13 @@ const fetchPatientData = async (cpf: string) => {
   return response.data;
 };
 
-const fetchLatestIndex = async (cpf: string, type: TipoIndice) => {
+const fetchLatestIndex = async (
+  cpf: string,
+  type: TipoIndice
+): Promise<IIndex> => {
   const response = await http.get(`/patient/${cpf}/index`, {
     params: {
-      type,
+      index_type: type,
     },
   });
 
@@ -32,7 +36,7 @@ export const useGetPatientData = (cpf: string) => {
   });
 
   const latestPulmonarData = useQuery({
-    queryKey: ["patient", cpf],
+    queryKey: ["patient", cpf, TipoIndice.PULMONAR],
     queryFn: async () => fetchLatestIndex(cpf, TipoIndice.PULMONAR),
   });
 

@@ -24,8 +24,20 @@ export class PatientService {
     return this.indexesService.findRecentIndexeByPatient(cpf);
   }
 
-  async findIndexes(cpf: string, { startDate, endDate }: PatientIndexesQuery) {
-    return this.indexesService.findBy({ cpf, startDate, endDate });
+  async findIndexes(
+    cpf: string,
+    { index_type, startDate, endDate }: PatientIndexesQuery,
+  ) {
+    if (index_type)
+      return this.indexesService.findAllIndexesByPatientAndType(
+        cpf,
+        index_type,
+      );
+
+    if (startDate)
+      return this.indexesService.findBy({ cpf, startDate, endDate });
+
+    return this.indexesService.findBy({ cpf });
   }
 
   async findAll(search?: string) {

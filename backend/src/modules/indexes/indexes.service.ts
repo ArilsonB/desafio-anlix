@@ -102,6 +102,21 @@ export class IndexesService {
     });
   }
 
+  async findAllIndexesByPatientAndType(
+    patientCPF: string,
+    indexType: TipoIndice,
+  ) {
+    return await this.indexRepository.find({
+      where: {
+        cpf: patientCPF,
+        tipo_indice: indexType,
+      },
+      order: {
+        data: 'desc',
+      },
+    });
+  }
+
   async exportCSVFile(patients: string[]) {
     const data = await this.indexRepository.find({
       where: {

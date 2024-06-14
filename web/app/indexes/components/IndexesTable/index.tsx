@@ -145,7 +145,7 @@ const IndexesTable: React.FC<IndexesTableProps> = ({
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            Previous
+            Anterior
           </Button>
           <Button
             variant="outline"
@@ -153,7 +153,7 @@ const IndexesTable: React.FC<IndexesTableProps> = ({
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Next
+            Próximo
           </Button>
         </div>
       </div>

@@ -2,7 +2,7 @@ import { http } from "@/lib/http";
 import { useQuery } from "@tanstack/react-query";
 
 const fetchIndexes = async () => {
-  const response = await http.get("/indexes");
+  const response = await http.get("/index");
 
   return response.data;
 };
