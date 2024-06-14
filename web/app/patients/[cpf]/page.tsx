@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { NextPage } from "next";
 import {
@@ -42,6 +43,13 @@ const PatientPage: NextPage<PatientPageProps> = ({ params }): JSX.Element => {
   ) {
     return <div>Carregando dados do paciente...</div>;
   }
+
+  if (
+    patientData.isError ||
+    latestCardiacData.isError ||
+    latestPulmonarData.isError
+  )
+    return <div>Erro ao carregar a página.</div>;
 
   const latestCardiacDate = format(
     parse(

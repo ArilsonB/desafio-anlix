@@ -1,3 +1,4 @@
+"use client";
 import { http } from "@/lib/http";
 
 export const useExportPatientIndexes = () => {

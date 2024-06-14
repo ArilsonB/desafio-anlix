@@ -1,27 +1,11 @@
+"use client";
 import React from "react";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip,
-  Legend,
-  ChartData,
-} from "chart.js";
+import { Chart as ChartJS, registerables, ChartData } from "chart.js";
 import { Chart } from "react-chartjs-2";
 import { TipoIndice } from "@/types/index.type";
-import { useGetPatientData } from "../use-get-patient-data";
 import { useGetPatientIndexes } from "./get-patient-indexes";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip,
-  Legend
-);
+ChartJS.register(...registerables);
 
 export const options = {
   responsive: true,
@@ -40,17 +24,6 @@ type BarChartProps = {
   indexType: TipoIndice;
 };
 
-const colors = [
-  "red",
-  "orange",
-  "yellow",
-  "lime",
-  "green",
-  "teal",
-  "blue",
-  "purple",
-];
-
 const BarChart: React.FC<BarChartProps> = ({
   cpf,
   indexType,
@@ -61,8 +34,6 @@ const BarChart: React.FC<BarChartProps> = ({
   });
 
   const { data: indexesData } = useGetPatientIndexes(cpf, indexType);
-
-  const labels = indexesData?.map((index) => index.data) ?? [];
 
   React.useEffect(() => {
     const chart = chartRef.current;

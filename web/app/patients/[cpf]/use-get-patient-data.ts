@@ -1,3 +1,4 @@
+"use client";
 import { http } from "@/lib/http";
 import { IIndex, TipoIndice } from "@/types/index.type";
 import { IPatient } from "@/types/patient.type";
