@@ -3,20 +3,20 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { IndexesModule } from './modules/indexes/indexes.module';
 import { PatientModule } from './modules/patient/patient.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import typeormConfig from './config/typeorm.config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT),
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
-      entities: ['../**/*.entity.ts'],
-      migrations: ['dist/migrations/*{.ts,.js}'],
-      autoLoadEntities: true,
-      synchronize: false,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [typeormConfig],
+      envFilePath: ['.env'],
+    }),
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) =>
+        configService.get('database'),
     }),
     PatientModule,
     IndexesModule,
