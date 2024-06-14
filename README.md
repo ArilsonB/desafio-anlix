@@ -16,7 +16,7 @@
 
 7. Importe os dados para o banco de dados com: "npm run seed:run"
 
-8. Inicie o backend com "npm run start:dev"
+8. Inicie o backend com "npm run start:dev" ou com "npm run build && npm run start:prod" para modo produção
 
 9. Acesse o backend em: "http://localhost:3001"
 
@@ -26,7 +26,7 @@ Obs: Acesse a documentação das rotas com o swagger em "http://localhost:3001/d
 
 10. Instale os pacotes "npm install"
 
-11. Rode o projeto: "npm run dev"
+11. Rode a interface web com: "npm run dev" para modo desenvolvedor ou com "npm run build && npm run start" para modo produção
 
 12. Acesse o frontend em: "http://localhost:3000"
 
