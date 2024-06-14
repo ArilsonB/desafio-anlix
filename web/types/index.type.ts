@@ -11,6 +11,6 @@ export interface IIndex {
   patient: IPatient; // or you could reference IPatient if you have the corresponding interface
   epoch: number;
   indice: number;
-  data: Date;
+  data: string;
   tipo_indice: TipoIndice;
 }

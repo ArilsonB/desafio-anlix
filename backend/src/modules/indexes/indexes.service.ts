@@ -102,7 +102,7 @@ export class IndexesService {
     });
   }
 
-  async exportCSVFile(patients: number[]) {
+  async exportCSVFile(patients: string[]) {
     const data = await this.indexRepository.find({
       where: {
         cpf: In(patients),

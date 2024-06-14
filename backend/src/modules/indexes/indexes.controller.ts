@@ -29,15 +29,19 @@ export class IndexesController {
   }
 
   @Post('export-csv')
-  downloadCSV(@Body() { patients }: ExportCsvDto, @Res() res: Response) {
-    const csvData = this.indexesService.exportCSVFile(patients);
+  async downloadCSV(
+    @Body() { patients }: ExportCsvDto,
+    @Res() response: Response,
+  ) {
+    const csvData = await this.indexesService.exportCSVFile(patients); // returns a string
 
-    // Set headers to prompt download
-    res.setHeader('Content-Type', 'text/csv');
-    res.setHeader('Content-Disposition', 'attachment; filename="data.csv"');
+    const stream = response.writeHead(200, {
+      'Content-Type': 'text/csv',
+      'Content-Disposition': 'attachment; filename="data.csv"',
+    });
 
-    // Send the CSV data
-    res.send(csvData);
+    stream.write(csvData);
+    stream.end();
   }
 
   @Get(':id')

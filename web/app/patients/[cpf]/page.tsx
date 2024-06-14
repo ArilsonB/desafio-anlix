@@ -8,8 +8,26 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { useGetPatientData } from "./use-get-patient-data";
 
-const PatientPage: NextPage = (): JSX.Element => {
+type PatientPageProps = {
+  params: {
+    cpf: string;
+  };
+};
+
+const PatientPage: NextPage<PatientPageProps> = ({ params }): JSX.Element => {
+  const { patientData, latestCardiacData, latestPulmonarData } =
+    useGetPatientData(params.cpf);
+
+  if (
+    patientData.isLoading &&
+    latestCardiacData.isLoading &&
+    latestPulmonarData.isLoading
+  ) {
+    return <div>Carregando dados do paciente...</div>;
+  }
+
   return (
     <div className="flex flex-col space-y-4">
       <div className="my-4 flex-col">

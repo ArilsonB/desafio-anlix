@@ -4,7 +4,7 @@ export const useExportPatientIndexes = () => {
   return {
     exportData: (patients: string[]) => {
       const xhr = new XMLHttpRequest();
-      xhr.open("POST", `${http.defaults.baseURL}/indexes/export-csv`, true);
+      xhr.open("POST", `${http.defaults.baseURL}/index/export-csv`, true);
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.responseType = "blob";
 

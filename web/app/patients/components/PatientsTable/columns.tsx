@@ -32,6 +32,7 @@ export const columns = [
   columnHelper.accessor("cpf", {
     header: "CPF",
     cell: (info) => <span>{info.getValue()}</span>,
+    enableHiding: false,
   }),
   columnHelper.accessor("nome", {
     header: "Nome",
@@ -52,6 +53,7 @@ export const columns = [
   columnHelper.display({
     id: "action",
     header: "Ver Indices",
+    enableHiding: false,
     cell: (info) => (
       <Button asChild>
         <Link href={`/patients/${info.row.original.cpf}`}>Ver indices</Link>

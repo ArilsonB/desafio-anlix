@@ -1,23 +1,7 @@
-"use client";
-
-import {
-  VisibilityState,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { ChevronDown } from "lucide-react";
-import * as React from "react";
-
+import React from "react";
+import { useGetIndexes } from "../../use-get-indexes";
+import { IIndex } from "@/types/index.type";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -26,23 +10,35 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { IPatient } from "@/types/patient.type";
-import { columns } from "./columns";
-import { useGetPatients } from "./use-get-patients";
-import { useExportPatientIndexes } from "./use-export-patient-indexes";
-import _ from "lodash";
+import {
+  flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  useReactTable,
+  VisibilityState,
+} from "@tanstack/react-table";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 
-export function PatientsTable() {
-  const [search, setSearch] = React.useState<string>("");
+import { columns } from "./columns";
+
+type IndexesTableProps = {
+  data: IIndex[];
+};
+
+const IndexesTable: React.FC<IndexesTableProps> = ({
+  data,
+}: IndexesTableProps): JSX.Element => {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
-  const { exportData } = useExportPatientIndexes();
-
-  const { data } = useGetPatients(search.trim() === "" ? undefined : search);
-
-  const table = useReactTable<IPatient>({
+  const table = useReactTable<IIndex>({
     data: data ?? [],
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -55,39 +51,10 @@ export function PatientsTable() {
       columnVisibility,
     },
   });
-
-  const debouncedSearch = _.debounce((value: string) => {
-    setSearch(value);
-  }, 500);
-
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    // setInputValue(value);
-    debouncedSearch(value);
-  };
-
   return (
     <div className="w-full">
       <div className="flex items-center justify-between gap-2 py-4">
-        <Input
-          placeholder="Filtrar por nome"
-          // value={search}
-          onChange={handleSearch}
-          className="max-w-sm"
-        />
         <div className="space-x-4">
-          <Button
-            onClick={() =>
-              exportData(
-                table
-                  .getFilteredSelectedRowModel()
-                  .rows.map((row) => row.original.cpf)
-              )
-            }
-            disabled={table.getFilteredSelectedRowModel().rows.length === 0}
-          >
-            Exportar Indices
-          </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
@@ -192,4 +159,6 @@ export function PatientsTable() {
       </div>
     </div>
   );
-}
+};
+
+export default IndexesTable;

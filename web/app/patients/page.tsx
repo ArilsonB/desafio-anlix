@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 
 const PatientsPage: NextPage = (): JSX.Element => {
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-col">
       <div className="my-4 flex-col">
         <h1 className="text-3xl">Pacientes</h1>
         <Separator className="my-4" />
