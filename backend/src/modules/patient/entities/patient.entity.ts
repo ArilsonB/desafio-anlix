@@ -43,7 +43,7 @@ export class Patient {
   endereco: string;
 
   @Column()
-  numero: number;
+  numero: string;
 
   @Column()
   bairro: string;
@@ -60,8 +60,8 @@ export class Patient {
   @Column()
   celular: string;
 
-  @Column('decimal', { precision: 3, scale: 2 })
-  altura: number;
+  @Column()
+  altura: string;
 
   @Column()
   peso: number;

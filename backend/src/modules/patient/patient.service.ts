@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreatePatientDto } from './dto/create-patient.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
 import { Patient } from './entities/patient.entity';
+import { TipoIndice } from '../indexes/entities/index.entity';
 
 @Injectable()
 export class PatientService {
@@ -13,6 +14,21 @@ export class PatientService {
   ) {}
   create(createPatientDto: CreatePatientDto) {
     return 'This action adds a new patient';
+  }
+
+  findLatestIndex(cpf: string, type: TipoIndice) {
+    const queryBuilder = this.patientRepository.createQueryBuilder('patient');
+
+    queryBuilder
+      .innerJoinAndSelect('indice', 'indice.cpf = patient.cpf')
+      .select(['indice'])
+      .where('patient.cpf = :cpf', { cpf })
+      .andWhere('indice.tipo_indice = :type', { type })
+      .orderBy('indice.data', 'DESC');
+
+    const data = queryBuilder.getOne();
+
+    return data;
   }
 
   async findAll() {

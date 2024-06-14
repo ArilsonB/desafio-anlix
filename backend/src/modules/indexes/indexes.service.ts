@@ -25,6 +25,7 @@ export class IndexesService {
       where: {
         id,
       },
+      relations: ['indices'],
     });
   }
 

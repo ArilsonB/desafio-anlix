@@ -6,10 +6,12 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { CreatePatientDto } from './dto/create-patient.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
 import { PatientService } from './patient.service';
+import { PatientIndexQuery } from './dto/index/patient-index.dto';
 
 @Controller('patient')
 export class PatientController {
@@ -23,6 +25,14 @@ export class PatientController {
   @Get()
   findAll() {
     return this.patientService.findAll();
+  }
+
+  @Get(':cpf/index')
+  findPatientIndex(
+    @Param('cpf') cpf: string,
+    @Query() { index_type }: PatientIndexQuery,
+  ) {
+    return this.patientService.findLatestIndex(cpf, index_type);
   }
 
   @Get(':cpf')
