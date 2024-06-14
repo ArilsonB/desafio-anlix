@@ -1,6 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class FindPatientsDto {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Search patient by name',
+  })
   search?: string = '';
 }

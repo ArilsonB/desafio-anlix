@@ -1,6 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class FindIndexesDto {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Date to find indexes',
+  })
   date: string;
 }

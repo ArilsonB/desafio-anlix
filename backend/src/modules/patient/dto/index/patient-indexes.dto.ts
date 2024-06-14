@@ -2,12 +2,18 @@ import { ApiProperty } from '@nestjs/swagger';
 import { TipoIndice } from 'src/modules/indexes/entities/index.entity';
 
 export class PatientIndexesQuery {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Get patient all indexes by index type',
+  })
   index_type?: TipoIndice;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Get patient indexes by date range',
+  })
   startDate?: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Get patients indexes by date range',
+  })
   endDate?: string;
 }
